@@ -1,0 +1,56 @@
+﻿@model List<Blogs>
+
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Blog</h1>
+        <a href="@Url.Action("Create", "Blog")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">EKLE</a>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Başlık</th>
+                                <th>Kısa Açıklama</th>
+                                <th>Tarih</th>
+                                <th>Fonksiyon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Title</td>
+                                    <td>@item.ShortDescription</td>
+                                    <td>@item.CreatedAt</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <a href="@Url.Action("Edit", "Blog", new { id = item.Id })" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Düzenle</a>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <a href="@Url.Action("Delete", "Blog", new { id= item.Id })" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Sil</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

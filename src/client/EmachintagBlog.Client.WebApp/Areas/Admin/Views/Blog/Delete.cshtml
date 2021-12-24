@@ -1,0 +1,59 @@
+﻿@model Blogs
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h2>Silmek istediğinize emin misiniz?</h2>
+    <div>
+        <form action="@Url.Action("DeleteConfirmed", "Blog", new { id = Model.Id })" method="post">
+
+            <hr />
+            <div class="container-fluid">
+
+                <div class="form-group">
+                    <img src="~/Images/Blogs/@Model.ImagePath" class="col-sm-4 img-thumbnail" />
+                    <input type="hidden" asp-for="@Model.ImagePath" />
+                </div>
+
+                <div class="form-group">
+                    <h5>Başlık</h5>
+                    <label>@Model.Title</label>
+                </div>
+
+                <div class="form-group">
+                    <h5>Kısa Açıklama</h5>
+                    <label>@Model.ShortDescription</label>
+                </div>
+
+                <div class="form-group">
+                    <h5>Uzun Açıklama</h5>
+                    <label>@Model.LongDescription</label>
+                </div>
+
+                <div class="form-group">
+                    <h5>Oluşturma tarihi</h5>
+                    <label>@Model.CreatedAt</label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Sil</button>
+                    </div>
+
+                    <div class="col-md-6">
+                        <a href="@Url.Action("Index", "Blog")" class="btn btn-secondary btn-user btn-block">Vazgeç</a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

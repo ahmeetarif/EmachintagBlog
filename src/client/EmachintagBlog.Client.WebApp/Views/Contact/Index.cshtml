@@ -1,0 +1,60 @@
+﻿@model Contacts
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Details informations -->
+<div class="col-xs-12">
+    <section class="contact two-column-inside white-box">
+
+        @if (ViewBag.About != null)
+        {
+            var aboutDetail = (About)ViewBag.About;
+            <div class="contact-me">
+                <h2>İletişim Bilgilerim</h2>
+                <ul>
+                    <li>
+                        <i class="pe-7s-mail"></i>
+                        <div class="contact-me-right">
+                            <p>@aboutDetail.Email</p>
+                            <span class="contact-me-right-desc">Email</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="pe-7s-call"></i>
+                        <div class="contact-me-right">
+                            <p>@aboutDetail.PhoneNumber</p>
+                            <span class="contact-me-right-desc">Telefon</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="pe-7s-map-marker"></i>
+                        <div class="contact-me-right">
+                            <p>
+                                @aboutDetail.Address
+                            </p>
+                            <span class="contact-me-right-desc">Adres</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        }
+
+        <div class="get-in-touch">
+            <h2>İletişim</h2>
+            <p class="font-primary">Bana soru sormaktan çekinme.</p>
+            <form action="@Url.Action("SaveContact", "Contact")" method="post">
+                <input class="col-xs-12 form-control" type="text" placeholder="İsim" asp-for="FullName">
+
+                <input class="col-xs-12 form-control" type="email" placeholder="Email" asp-for="Email">
+
+                <input class="col-xs-12 form-control" type="text" placeholder="Başlık" asp-for="Subject">
+
+                <textarea class=" col-xs-12 form-control" id="" rows="6" placeholder="Mesaj" asp-for="Message"></textarea>
+                <br />
+                <button type="submit" class="btn"><i class="pe-7s-paper-plane"></i> Gönder</button>
+            </form>
+        </div>
+    </section>
+</div>

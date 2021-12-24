@@ -1,0 +1,49 @@
+﻿@model Blogs
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <form action="@Url.Action("Edit", "Blog")" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+
+            <div class="form-group">
+                <label>Başlık</label>
+                <input type="text" class="form-control form-control-user" placeholder="Başlık gir..." asp-for="Title">
+            </div>
+
+            <div class="form-group">
+                <label>Kısa Açıklama</label>
+                <input type="text" class="form-control form-control-user" placeholder="Açıklama gir..." asp-for="ShortDescription">
+            </div>
+
+            <div class="form-group">
+                <label>Uzun Açıklama</label>
+                <textarea type="text" class="form-control form-control-user" placeholder="Açıklama gir..." asp-for="LongDescription"></textarea>
+            </div>
+
+            <div class="form-group">
+                <img src="~/Images/Blogs/@Model.ImagePath" class="col-sm-4 img-thumbnail" />
+                <label>Resmi Değiştir : </label>
+                <input type="file" name="formFile" />
+                <input type="hidden" asp-for="@Model.ImagePath" />
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+        </div>
+
+        <div class="form-group">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Güncelle</button>
+                </div>
+                <div class="col-md-6">
+                    <a href="@Url.Action("Index", "Blog")" class="btn btn-secondary btn-user btn-block">Vazgeç</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

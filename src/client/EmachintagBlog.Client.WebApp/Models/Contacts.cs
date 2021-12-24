@@ -1,5 +1,4 @@
 ﻿using EmachintagBlog.Client.WebApp.Common.Core;
-using System.ComponentModel.DataAnnotations;
 
 namespace EmachintagBlog.Client.WebApp.Models
 {

@@ -1,8 +1,97 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using EmachintagBlog.Client.WebApp.Common.Extensions
+@{
+    ViewData["Title"] = "Anasayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- ARTICLES -->
+<div class="col-lg-8 col-xs-12">
+    <section class="articles">
+
+        @if (ViewBag.Blogs != null)
+        {
+            var listOfArticleColors = new List<string> { "blue-article", "red-article", "yellow-article" };
+            var counter = 0;
+            var classSelector = listOfArticleColors[counter];
+            foreach (var blog in (List<BlogViewModel>)ViewBag.Blogs)
+            {
+                <article class="@classSelector">
+                    <div class="articles-header">
+                        <time datetime="@blog.CreatedAt">@blog.CreatedAt.TimeAgo()</time>
+                    </div>
+
+                    <div>
+                        <img src="~/Images/Blogs/@blog.ImagePath" alt="IMAGE" style="width: 200px; height: auto; float: left; margin: 10px;" />
+                    </div>
+
+                    <div class="articles-content">
+                        <h1>
+                            <a href="/Home/Detail?id=@blog.Id" title="">
+                                @blog.Title
+                            </a>
+                        </h1>
+                        <p>
+                            @blog.ShortDescription
+                        </p>
+                    </div>
+                    <div class="articles-footer">
+                        <ul class="articles-footer-info">
+                            <li>
+                                <a href="#" class="light-link" title="">
+                                    <i class="pe-7s-comment"></i> @blog.TotalResponse Yanıt
+                                </a>
+                            </li>
+                        </ul>
+                        <a title="" class="btn" href="/Home/Detail?id=@blog.Id">Daha Fazla</a>
+
+                    </div>
+                </article>
+                if (counter == listOfArticleColors.Count - 1)
+                {
+                    classSelector = listOfArticleColors[0];
+                }
+                classSelector = listOfArticleColors[counter];
+            }
+        }
+    </section>
+</div>
+
+<!-- AUTHOR -->
+<div class="aside-blocks col-lg-4 col-xs-12">
+
+    @if (ViewBag.About != null)
+    {
+        var aboutDetail = (About)ViewBag.About;
+        <aside class="author">
+            <img src="~/Images/Abouts/@aboutDetail.ImagePath" alt="" data-rjs="2" style="width: 50%; border-radius: 50%;">
+            <h2>@aboutDetail.FullName</h2>
+            @{ var aboutMessage = aboutDetail.Message.Length > 20 ? aboutDetail.Message.Substring(0, 20) : aboutDetail.Message;}
+            <p>@aboutMessage</p>
+            <div class="social">
+
+                @if (aboutDetail.TwitterLink != null)
+                {
+                    <a href="" title="Twitter">
+                        <i class="icon-social_twitter_circle"></i>
+                    </a>
+                }
+                @if (aboutDetail.InstagramLink != null)
+                {
+                    <a href="" title="Instagram">
+                        <i class="icon-social_instagram_circle"></i>
+                    </a>
+                }
+                @if (aboutDetail.FacebookLink != null)
+                {
+                    <a href="" title="Facebook">
+                        <i class="icon-social_facebook_circle"></i>
+                    </a>
+                }
+
+            </div>
+            <ul class="author-nav">
+                <li><a href="/Contact" title=""><i class="pe-7s-paper-plane"></i> Mesaj Gönder</a></li>
+            </ul>
+        </aside>
+    }
+
 </div>

@@ -1,0 +1,49 @@
+﻿@model List<BlogResponseViewModel>
+<footer>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 col-xs-12">
+                <div class="footer-section">
+                    <h3 class="footer-section-title">Son Yanıtlar</h3>
+                    <ul class="footer-section-content">
+
+                        @if (Model.Any())
+                        {
+
+                            foreach (var blogComment in Model)
+                            {
+                                <li class="footer-section-content-response">
+                                    <img src="https://kstu.edu.tr/kstu-file/uploads/default-user-image.png" alt="Profile Picture" data-rjs="2">
+                                    <div class="footer-section-content-response-wrapper">
+                                        <h4>
+                                            <span class="response-author">@blogComment.UserName</span>
+                                        </h4>
+                                        <p class="font-primary">@blogComment.CommentMessage</p>
+                                    </div>
+                                </li>
+                            }
+
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="copyright">
+                    <p class="font-primary">
+                        &copy; All
+                        Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end COPYRIHT -->
+</footer>

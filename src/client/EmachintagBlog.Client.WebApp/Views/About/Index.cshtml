@@ -1,0 +1,46 @@
+﻿@model About
+@{
+    ViewData["Title"] = "Hakkımda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- General informations -->
+<div class="col-xs-12">
+    <section class="general-info white-box">
+        <div class="author">
+            <img src="~/Images/Abouts/@Model.ImagePath" alt="" data-rjs="2" style="width: 50%; border-radius: 50%;">
+            <ul class="author-nav">
+                <li><a href="/Contact" title=""><i class="pe-7s-paper-plane"></i> İletişime Geç</a></li>
+            </ul>
+        </div>
+        <div class="general-info-right">
+            <h1>Ben @Model.FullName</h1>
+            <div class="social">
+
+                @if (Model.TwitterLink != null)
+                {
+                    <a href="" title="Twitter">
+                        <i class="icon-social_twitter_circle"></i>
+                    </a>
+                }
+                @if (Model.InstagramLink != null)
+                {
+                    <a href="" title="Instagram">
+                        <i class="icon-social_instagram_circle"></i>
+                    </a>
+                }
+                @if (Model.FacebookLink != null)
+                {
+                    <a href="" title="Facebook">
+                        <i class="icon-social_facebook_circle"></i>
+                    </a>
+                }
+
+            </div>
+            <div class="clear"></div>
+            <p>
+                @Model.Message
+            </p>
+        </div>
+    </section>
+</div>

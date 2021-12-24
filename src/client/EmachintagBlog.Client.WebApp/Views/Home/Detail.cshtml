@@ -1,0 +1,131 @@
+﻿@using EmachintagBlog.Client.WebApp.Common.Extensions;
+@inject EmachintagBlog.Client.WebApp.Common.CurrentUser currentUser;
+@model BlogViewModel
+@{
+    ViewData["Title"] = "Blog Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- ARTICLE BLOG POST -->
+<section class="articles articles-blog-post">
+    <article class="articles-blog-post">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xs-12">
+
+                    <!-- TEXT ARTICLE -->
+                    <div class="articles-header">
+                        <time datetime="@Model.CreatedAt">@Model.CreatedAt.TimeAgo()</time>
+                    </div>
+                    <div class="articles-content">
+                        <br />
+                        <div>
+                            <img src="~/Images/Blogs/@Model.ImagePath" alt="IMAGE" style="float: left; margin-right: 10px; white-space: pre-line" />
+
+                            <h1 class="articles-content-blog-post-title">
+                                <a href="#" title="Keeping Your Business And Clients Safe With Digital Policies">
+                                    @Model.Title
+                                </a>
+                            </h1>
+                        </div>
+                        <hr />
+                        <p>
+                            @Model.LongDescription
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+<!-- end ARTICLE BLOG POST -->
+<!-- ARTICLE BOTTOM INFO -->
+<div class="articles-info">
+
+    <!-- ARTICLE BOTTOM INFO COMMENTS -->
+    <section class="articles-info-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xs-12">
+                    <h1 class="articles-info-section-title"><i class="pe-7s-comment"></i> Yanıtlar <span class="italic">(@Model.TotalResponse)</span></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xs-12">
+                    <div class="comments">
+                        <!-- WRITE NEW COMMENT -->
+                        <a title="" href="javascript:void(0)" class="light-link comment button-comment" onclick="writeMessage()">
+                            <span class="button-comment-span">
+                                <i class="pe-7s-comment">
+                                </i> Yourm Yap
+                            </span>
+                        </a>
+
+                        @if (ViewBag.CommentError != null)
+                        {
+                            <p>Show me I'm Error!</p>
+                        }
+
+                        <div class="articles-author" id="message-area">
+
+                            <form action="@Url.Action("PostComment", "Home")" method="post">
+
+                                <textarea style="width: 100%; height: 100px;" name="commentText"></textarea>
+                                <input type="hidden" name="blogId" asp-for="Id" />
+
+                                @if (currentUser.IsAuthenticated)
+                                {
+                                    <button type="submit" class="btn">Gönder</button>
+                                }
+                                else
+                                {
+                                    <span>Lütfen Giriş Yapın!</span>
+                                }
+
+                            </form>
+
+                        </div>
+
+                        <!-- COMMENTS LIST -->
+                        <ol>
+
+                            @if (ViewBag.BlogComments != null)
+                            {
+                                foreach (var comment in (List<BlogResponseViewModel>)ViewBag.BlogComments)
+                                {
+                                    <li class="comment">
+                                        <img src="https://kstu.edu.tr/kstu-file/uploads/default-user-image.png" alt="Profile Picture" data-rjs="2" style="width: 56px; height: 56px;">
+                                        <div class="comment-content">
+                                            <h3>@comment.UserName <span style=" border: 1px solid; border-radius: 20px; text-transform: uppercase; font-size: 12px; padding: 2px 7px; margin: 0 6px;">@comment.Type</span></h3>
+                                            <time datetime="2009-11-13T20:00Z">@comment.CreatedAt</time>
+                                            <p>@comment.CommentMessage</p>
+                                        </div>
+                                    </li>
+                                }
+                            }
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+<!-- end ARTICLE BOTTOM INFO -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $('#message-area').hide();
+
+    function writeMessage() {
+        var getMessageArea = $('#message-area');
+        getMessageArea.toggle();
+    }
+
+</script>

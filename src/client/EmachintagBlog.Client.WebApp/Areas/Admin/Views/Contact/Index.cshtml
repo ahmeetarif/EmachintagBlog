@@ -1,0 +1,63 @@
+﻿@model List<Contacts>
+
+@{
+    ViewData["Title"] = "Mesajlar";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Mesajlar</h1>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>İsim</th>
+                                <th>E-Posta</th>
+                                <th>Başlık</th>
+                                <th>Fonksiyon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var mesaj in Model)
+                            {
+                                <tr>
+                                    <td>@mesaj.FullName</td>
+                                    <td>@mesaj.Email</td>
+                                    @{
+                                        var subjectContent = string.Empty;
+                                        if (mesaj.Subject.Length > 50)
+                                        {
+                                            subjectContent = mesaj.Subject.Substring(0, 50);
+                                        }
+                                        else
+                                        {
+                                            subjectContent = mesaj.Subject;
+                                        }
+                                    }
+                                    <td>@subjectContent</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <a href="@Url.Action("Detail", "Contact", new { id = mesaj.Id })" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Detay</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

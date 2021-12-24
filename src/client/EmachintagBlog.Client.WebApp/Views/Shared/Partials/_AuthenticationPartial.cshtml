@@ -1,0 +1,13 @@
+﻿@inject EmachintagBlog.Client.WebApp.Common.CurrentUser currentUser
+
+@if (currentUser.IsAuthenticated)
+{
+    <h4>Merhaba @currentUser.Email</h4>
+}
+else
+{
+    <div style="margin:5px; padding:5px;">
+        <a href="/Authentication/Login">Giriş Yap</a>
+        <a href="/Authentication/Register">Kaydol</a>
+    </div>
+}
