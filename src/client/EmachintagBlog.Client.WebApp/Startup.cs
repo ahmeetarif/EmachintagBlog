@@ -34,7 +34,7 @@ namespace EmachintagBlog.Client.WebApp
             {
                 // MARK : Password
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 6;
+                options.Password.RequiredLength = 3;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
@@ -48,7 +48,7 @@ namespace EmachintagBlog.Client.WebApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddHttpContextAccessor();
-            
+
             services.AddSingleton<CurrentUser>();
         }
 

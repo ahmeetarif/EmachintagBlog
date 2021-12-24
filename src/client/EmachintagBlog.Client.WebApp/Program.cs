@@ -22,17 +22,17 @@ namespace EmachintagBlog.Client.WebApp
                 {
                     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                    var getUser = await userManager.FindByEmailAsync("admin@admin.com");
+                    var getUser = await userManager.FindByEmailAsync("admin1@admin.com");
 
                     if (getUser == null)
                     {
                         var result = await userManager.CreateAsync(new ApplicationUser
                         {
-                            Email = "admin@admin.com",
+                            Email = "admin1@admin.com",
                             FullName = "Admin User",
-                            UserName = "adminuser22",
+                            UserName = "adminuser2222",
                             Type = Common.Enums.UserTypeEnum.ADMIN
-                        }, "@Admin123456");
+                        }, "123");
                     }
                 }
                 catch (Exception ex)

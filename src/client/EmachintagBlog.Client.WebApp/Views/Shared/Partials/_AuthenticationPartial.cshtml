@@ -3,6 +3,7 @@
 @if (currentUser.IsAuthenticated)
 {
     <h4>Merhaba @currentUser.Email</h4>
+    <a href="/Authentication/LogOut">Çıkış Yap</a>
 }
 else
 {
