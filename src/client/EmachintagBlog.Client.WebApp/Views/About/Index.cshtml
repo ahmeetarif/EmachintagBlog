@@ -8,28 +8,33 @@
 <div class="col-xs-12">
     <section class="general-info white-box">
         <div class="author">
-            <img src="~/Images/Abouts/@Model.ImagePath" alt="" data-rjs="2" style="width: 50%; border-radius: 50%;">
+            @{
+                var defaultImage = Model != null ? Model.ImagePath : string.Empty;
+                var defaultName = Model != null ? Model.FullName : string.Empty;
+                var defaultMessage = Model != null ? Model.Message : string.Empty;
+            }
+            <img src="~/Images/Abouts/@defaultImage" alt="" data-rjs="2" style="width: 50%; border-radius: 50%;">
             <ul class="author-nav">
                 <li><a href="/Contact" title=""><i class="pe-7s-paper-plane"></i> İletişime Geç</a></li>
             </ul>
         </div>
         <div class="general-info-right">
-            <h1>Ben @Model.FullName</h1>
+            <h1>Ben @defaultName</h1>
             <div class="social">
 
-                @if (Model.TwitterLink != null)
+                @if (Model != null && Model.TwitterLink != null)
                 {
                     <a href="" title="Twitter">
                         <i class="icon-social_twitter_circle"></i>
                     </a>
                 }
-                @if (Model.InstagramLink != null)
+                @if (Model != null && Model.InstagramLink != null)
                 {
                     <a href="" title="Instagram">
                         <i class="icon-social_instagram_circle"></i>
                     </a>
                 }
-                @if (Model.FacebookLink != null)
+                @if (Model != null && Model.FacebookLink != null)
                 {
                     <a href="" title="Facebook">
                         <i class="icon-social_facebook_circle"></i>
@@ -39,7 +44,7 @@
             </div>
             <div class="clear"></div>
             <p>
-                @Model.Message
+                @defaultMessage
             </p>
         </div>
     </section>
