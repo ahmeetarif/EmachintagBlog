@@ -101,5 +101,12 @@ namespace EmachintagBlog.Client.WebApp.Controllers
             return View(registerVM);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
